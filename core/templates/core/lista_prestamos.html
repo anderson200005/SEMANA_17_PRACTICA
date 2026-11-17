@@ -1,0 +1,20 @@
+{% extends 'core/base.html' %}
+{% block content %}
+    <h2>Préstamos</h2>
+    <a href="{% url 'crear_prestamo' %}" class="btn btn-crear">+ Nuevo Préstamo</a>
+    <table>
+        <tr><th>Libro</th><th>Usuario / Lector</th><th>Fecha de Préstamo</th><th>Devuelto</th><th>Acciones</th></tr>
+        {% for item in items %}
+        <tr>
+            <td>{{ item.libro.titulo }}</td>
+            <td>{{ item.usuario }}</td>
+            <td>{{ item.fecha_prestamo }}</td>
+            <td>{{ item.devuelto|yesno:"Sí,No" }}</td>
+            <td>
+                <a href="{% url 'editar_prestamo' item.pk %}" class="btn btn-editar">Editar</a>
+                <a href="{% url 'eliminar_prestamo' item.pk %}" class="btn btn-eliminar">Eliminar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
